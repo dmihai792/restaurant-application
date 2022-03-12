@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "products")
+@SecondaryTable(name="recipes")
 public class Product {
 
     @Id
@@ -30,6 +31,21 @@ public class Product {
 
     @Column
     private Long quantity;
+
+    @Column(table="recipes", name = "ingredient_id")
+    Long ingredientId;
+
+    @Column(table="recipes", name = "ingredient_description")
+    String ingredientDescription;
+
+    @Column(table="recipes", name="weight")
+    Long ingredientWeight;
+
+    @Column(table="recipes", name="quantity")
+    Long ingredientQuantity;
+
+    @Column(table="recipes", name="calories")
+    Long ingredientCalories;
 
     public Long getId() {
         return id;
@@ -93,5 +109,45 @@ public class Product {
 
     public void setQuantity(Long quantity) {
         this.quantity = quantity;
+    }
+
+    public Long getIngredientId() {
+        return ingredientId;
+    }
+
+    public void setIngredientId(Long ingredientId) {
+        this.ingredientId = ingredientId;
+    }
+
+    public String getIngredientDescription() {
+        return ingredientDescription;
+    }
+
+    public void setIngredientDescription(String ingredientDescription) {
+        this.ingredientDescription = ingredientDescription;
+    }
+
+    public Long getIngredientWeight() {
+        return ingredientWeight;
+    }
+
+    public void setIngredientWeight(Long ingredientWeight) {
+        this.ingredientWeight = ingredientWeight;
+    }
+
+    public Long getIngredientQuantity() {
+        return ingredientQuantity;
+    }
+
+    public void setIngredientQuantity(Long ingredientQuantity) {
+        this.ingredientQuantity = ingredientQuantity;
+    }
+
+    public Long getIngredientCalories() {
+        return ingredientCalories;
+    }
+
+    public void setIngredientCalories(Long ingredientCalories) {
+        this.ingredientCalories = ingredientCalories;
     }
 }

@@ -39,6 +39,10 @@ public class ProductRepositoryTests {
         product.setDescription("test");
         product.setProductCategory("suc");
         product.setPrice(20.0);
+        product.setIngredientDescription("orez");
+        product.setIngredientQuantity(2L);
+        product.setIngredientWeight(300L);
+        product.setIngredientCalories(300L);
         Product savedProduct = repo.save(product);
 
         Product existProduct = entityManager.find(Product.class, savedProduct.getId());
