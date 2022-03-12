@@ -1,7 +1,7 @@
 package com.restaurant.app;
 
-import com.restaurant.app.inventory.Ingredient;
-import com.restaurant.app.inventory.IngredientRepository;
+import com.restaurant.app.repository.Ingredient;
+import com.restaurant.app.repository.IngredientRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;

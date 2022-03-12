@@ -1,8 +1,8 @@
 package com.restaurant.app.controllers;
 
-import com.restaurant.app.inventory.Ingredient;
-import com.restaurant.app.inventory.IngredientRepository;
-import com.restaurant.app.inventory.IngredientService;
+import com.restaurant.app.repository.Ingredient;
+import com.restaurant.app.repository.IngredientRepository;
+import com.restaurant.app.services.IngredientService;
 import com.restaurant.app.user.User;
 import com.restaurant.app.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,6 @@ public class AppController {
 
     @Autowired
     private IngredientRepository ingredientRepo;
-
 
     private IngredientService ingredientService;
 
