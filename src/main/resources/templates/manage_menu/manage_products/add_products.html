@@ -110,18 +110,35 @@ body {
 
 
             <div class="form-group row">
-                <label class="col-4 col-form-label">Ingredient 1: </label>
-                <div class="col-8">
+
+                <div class="col-md-6">
+                    <label class="form-label">Ingredient 1 </label>
                     <input type="text" id="Ingredient_Name" th:field="*{ingredientDescription[0].ingredientName}" class="form-control"
                     />
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Quantity</label>
+                    <input type="text" class="form-control" id="ingredientQuantity0" th:field="*{ingredientDescription[0].ingredientQuantity}">
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Weight</label>
+                    <input type="text" class="form-control" id="ingredientWeight0" th:field="*{ingredientDescription[0].ingredientWeight}">
                 </div>
             </div>
 
             <div class="form-group row">
-                <label class="col-4 col-form-label">Ingredient 2: </label>
-                <div class="col-8">
+                <div class="col-md-6">
+                    <label class="form-label">Ingredient 2 </label>
                     <input type="text" id="Ingredient_Name2" th:field="*{ingredientDescription[1].ingredientName}" class="form-control"
                     />
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Quantity</label>
+                    <input type="text" class="form-control" id="ingredientQuantity1" th:field="*{ingredientDescription[1].ingredientQuantity}">
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Weight</label>
+                    <input type="text" class="form-control" id="ingredientWeight1" th:field="*{ingredientDescription[1].ingredientWeight}">
                 </div>
             </div>
 

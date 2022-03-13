@@ -1,6 +1,5 @@
 package com.restaurant.app.repository;
 
-import jdk.nashorn.internal.objects.annotations.Getter;
 import lombok.Builder;
 
 @Builder

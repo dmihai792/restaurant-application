@@ -21,6 +21,9 @@ public class Ingredient {
     @Column(nullable = true)
     private Long weight;
 
+    @Column(nullable = true)
+    private Long availableQuantity;
+
     @Column(nullable = false)
     private Long price;
 

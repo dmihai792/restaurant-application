@@ -22,6 +22,7 @@ import java.util.List;
 @Log4j2
 public class ProductsController {
 
+    @Autowired
     private ProductService productService;
 
     @Autowired
@@ -53,7 +54,6 @@ public class ProductsController {
     @PostMapping("/process_products")
     public String processProducts(Product product) {
 
-
         ObjectMapper Obj = new ObjectMapper();
         try {
             String jsonStr = Obj.writeValueAsString(product);
@@ -68,6 +68,11 @@ public class ProductsController {
                 productItem.setProduct(product);
             });
         }
+        product.setIngredientPrice(productService.calculateTotalIngredientPrice(product));
+        log.info("The total price of ingredients is: "+ product.getIngredientPrice());
+
+        product.setProfit(productService.calculateProductProfit(product));
+        log.info("The total profit is: "+ product.getProfit());
         productRepository.save(product);
         System.out.println("product added to database");
         return "redirect:/manage_products";
