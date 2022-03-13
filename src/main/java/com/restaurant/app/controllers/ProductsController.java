@@ -5,25 +5,21 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.restaurant.app.repository.*;
 import com.restaurant.app.services.IngredientService;
 import com.restaurant.app.services.ProductService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import java.sql.Array;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.EnumSet;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Controller
+@Log4j2
 public class ProductsController {
 
     private ProductService productService;
@@ -48,12 +44,30 @@ public class ProductsController {
     @GetMapping("/add_products")
     public String addProducts(Model model) {
         model.addAttribute("product", new Product());
-        model.addAttribute("ingredient", new Ingredient());
+//        model.addAttribute("ingredientRecipe", new IngredientRecipe());
+//        model.addAttribute("ingredient", new Ingredient());
         return "/manage_menu/manage_products/add_products";
     }
 
+
     @PostMapping("/process_products")
     public String processProducts(Product product) {
+
+
+        ObjectMapper Obj = new ObjectMapper();
+        try {
+            String jsonStr = Obj.writeValueAsString(product);
+
+            log.info(jsonStr);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (product.getIngredientDescription().size() > 0) {
+            product.getIngredientDescription().stream().forEach(productItem -> {
+                productItem.setProduct(product);
+            });
+        }
         productRepository.save(product);
         System.out.println("product added to database");
         return "redirect:/manage_products";
@@ -84,7 +98,7 @@ public class ProductsController {
         return "redirect:/manage_products";
     }
 
-    @RequestMapping(value="/ingredient_name_autocomplete")
+    @RequestMapping(value = "/ingredient_name_autocomplete")
     @ResponseBody
     public List<String> ingredientNamesAutocomplete(@RequestParam(value = "term", required = false) String searchTerm) {
 
@@ -92,17 +106,17 @@ public class ProductsController {
 
     }
 
-    @GetMapping(value="/ingredientSearch")
+    @GetMapping(value = "/ingredientSearch")
     public ResponseEntity<String> ingredientSearch(@RequestParam(value = "term", required = false) String searchTerm) {
 
         List<String> strings = simulateSearchResult(searchTerm);
 
         ObjectMapper mapper = new ObjectMapper();
-        String resp="";
+        String resp = "";
 
-        try{
+        try {
             resp = mapper.writeValueAsString(strings);
-        } catch (JsonProcessingException e){
+        } catch (JsonProcessingException e) {
 
         }
         return new ResponseEntity<String>(resp, HttpStatus.OK);
@@ -115,7 +129,7 @@ public class ProductsController {
 
         // iterate a list and filter by ingredientName
         for (Ingredient ingredient : listIngredients) {
-            if(ingredient.getDescription().contains(ingredientName)) {
+            if (ingredient.getDescription().contains(ingredientName)) {
                 allIngredientNames.add(ingredient.getDescription());
             }
         }

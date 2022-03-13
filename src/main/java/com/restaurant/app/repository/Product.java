@@ -1,12 +1,10 @@
 package com.restaurant.app.repository;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "products")
-@SecondaryTable(name="recipes")
 public class Product {
 
     @Id
@@ -34,20 +32,8 @@ public class Product {
     @Column
     private Long quantity;
 
-    @Column(table="recipes", name = "ingredient_id")
-    Long ingredientId;
-
-    @Column(table="recipes", name = "ingredient_description")
-    String ingredientDescription;
-
-    @Column(table="recipes", name="weight")
-    Long ingredientWeight;
-
-    @Column(table="recipes", name="quantity")
-    Long ingredientQuantity;
-
-    @Column(table="recipes", name="calories")
-    Long ingredientCalories;
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<IngredientRecipe> ingredientDescription;
 
     public Long getId() {
         return id;
@@ -113,43 +99,11 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public Long getIngredientId() {
-        return ingredientId;
-    }
-
-    public void setIngredientId(Long ingredientId) {
-        this.ingredientId = ingredientId;
-    }
-
-    public String getIngredientDescription() {
+    public List<IngredientRecipe> getIngredientDescription() {
         return ingredientDescription;
     }
 
-    public void setIngredientDescription(String ingredientDescription) {
+    public void setIngredientDescription(List<IngredientRecipe> ingredientDescription) {
         this.ingredientDescription = ingredientDescription;
-    }
-
-    public Long getIngredientWeight() {
-        return ingredientWeight;
-    }
-
-    public void setIngredientWeight(Long ingredientWeight) {
-        this.ingredientWeight = ingredientWeight;
-    }
-
-    public Long getIngredientQuantity() {
-        return ingredientQuantity;
-    }
-
-    public void setIngredientQuantity(Long ingredientQuantity) {
-        this.ingredientQuantity = ingredientQuantity;
-    }
-
-    public Long getIngredientCalories() {
-        return ingredientCalories;
-    }
-
-    public void setIngredientCalories(Long ingredientCalories) {
-        this.ingredientCalories = ingredientCalories;
     }
 }
