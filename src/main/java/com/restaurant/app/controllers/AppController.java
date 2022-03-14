@@ -31,6 +31,9 @@ public class AppController {
         return "index";
     }
 
+    @GetMapping("user_menu")
+    public String viewUserMenuPage(){return "/user_pages/user_menu";}
+
     @GetMapping("/manage_menu")
     public String viewManageMenu() {
         return "manage_menu";

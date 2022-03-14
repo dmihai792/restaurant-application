@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>User_Menu</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container text-center">
+    <div>
+        <form th:action="@{/logout}" method="post">
+            <p>
+                Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b>
+            </p>
+            <input type="submit" value="Sign Out"/>
+        </form>
+    </div>
+    <div>
+        <h1>Menu</h1>
+    </div>
+
+    <div>
+        <img th:src="@{menu_images/drinks.jpg}"  width=20%; height="auto" class="rounded float-start img-thumbnail thumbnail-box-shadow text-start" alt="Photo Confirmation"/>
+        <img th:src="@{menu_images/ramen.jpg}" width=20%; height="auto" class="rounded float-start img-thumbnail thumbnail-box-shadow text-center" alt="Photo Confirmation"/>
+        <img th:src="@{menu_images/sushi.jpg}"  width=30%; height="auto" class="rounded float-start img-thumbnail thumbnail-box-shadow text-start" alt="Photo Confirmation"/>
+
+    </div>
+
+</div>
+</body>
+</html>
